@@ -6,15 +6,9 @@ import { Registration } from './register-screen';
 
 const RootStack = StackNavigator(
   {
-    Auth: {
-      screen: Auth,
-    },
-    Main: {
-      screen: Main,
-    },
-    Register: {
-      screen: Registration,
-    },
+    Auth,
+    Main,
+    Register:  Registration,
   },
   {
     initialRouteName: 'Auth',
