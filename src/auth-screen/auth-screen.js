@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Container, Form, Item, Text, Input } from 'native-base';
 import { loginAction } from './auth-screen-actions';
+import { NavigationActions, StackActions } from 'react-navigation';
 
 export class AuthComponent extends Component {
   static navigationOptions = {
@@ -36,7 +37,12 @@ export class AuthComponent extends Component {
     const { login, password } = this.state;
     loginAction({ login, password });
     // NOTE 17-Oct-18 [NZ]: skipped login
-    this.props.navigation.navigate('Main');
+    const resetAction = StackActions.reset({
+      index: 0,
+      actions: [NavigationActions.navigate({ routeName: 'Main' })],
+    });
+
+    this.props.navigation.dispatch(resetAction);
   };
 
   registerHandler = () => {
