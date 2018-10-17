@@ -26,32 +26,14 @@ export class RegisterComponent extends Component {
   onChange = (type: string) => value => {
     switch (type) {
       case 'email':
+      case 'first_name':
+      case 'password':
+      case 'surname':
         this.setState(state => ({
           ...state,
           [type]: value,
         }));
         break;
-      case 'first_name': {
-        this.setState(state => ({
-          ...state,
-          [type]: value,
-        }));
-        break;
-      }
-      case 'password': {
-        this.setState(state => ({
-          ...state,
-          [type]: value,
-        }));
-        break;
-      }
-      case 'surname': {
-        this.setState(state => ({
-          ...state,
-          [type]: value,
-        }));
-        break;
-      }
       default:
         return;
     }
@@ -106,7 +88,7 @@ export class RegisterComponent extends Component {
             />
           </Item>
         </Form>
-        <Button onPress={this.registerHandler}  block>
+        <Button onPress={this.registerHandler} block>
           <Text>Complete Registration</Text>
         </Button>
       </Container>
