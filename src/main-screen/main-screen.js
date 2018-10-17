@@ -1,20 +1,77 @@
 import React from 'react';
-import { Button, Text, View } from 'react-native';
+import {
+  Input,
+  Item,
+  Label,
+  Content,
+  Form,
+  Button,
+  Icon,
+  Text,
+} from 'native-base';
 
 export class MainComponent extends React.Component {
+  state = {};
+
+  static navigationOptions = {
+    title: 'MainComponent',
+  };
+
+  createAsset = () => {};
+
+  createProject = () => {};
+
+  onChange = type => value => {
+    switch (type) {
+      case 'address_1':
+      case 'post_code':
+      case 'city':
+        return this.setState(state => ({ ...state, [type]: value }));
+      default:
+        return;
+    }
+  };
+
   render() {
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Details Screen</Text>
-        <Button
-          title="Go to Details... again"
-          onPress={() => this.props.navigation.push('Details')}
-        />
-        <Button
-          title="Exit"
-          onPress={() => this.props.navigation.goBack()}
-        />
-      </View>
+      <Content>
+        <Form style={{ paddingTop: 5, marginBottom: 30 }}>
+          <Item floatingLabel>
+            <Label>Address 1</Label>
+            <Input onChangeText={this.onChange('address_1')} />
+          </Item>
+          <Item floatingLabel>
+            <Label>Post Code</Label>
+            <Input onChangeText={this.onChange('post_code')} />
+          </Item>
+          <Item floatingLabel last>
+            <Label>City</Label>
+            <Input onChangeText={this.onChange('city')} />
+          </Item>
+          <Button  style={{ marginTop: 25}} block warning onPress={this.createAsset}>
+            <Icon name="md-battery-charging" />
+            <Text>Create asset</Text>
+          </Button>
+        </Form>
+        <Item>
+          <Button success onPress={this.createProject}>
+            <Icon name="md-battery-charging" />
+            <Text>Create a project for an asset</Text>
+          </Button>
+        </Item>
+        <Item>
+          <Button primary onPress={() => alert('Not implemented yet :(')}>
+            <Icon name="md-beer" />
+            <Text>Fetch list of your assets</Text>
+          </Button>
+        </Item>
+        <Item>
+          <Button info onPress={() => alert('Not implemented yet :(')}>
+            <Icon name="ios-boat-outline" />
+            <Text>Fetch list of projects</Text>
+          </Button>
+        </Item>
+      </Content>
     );
   }
 }
