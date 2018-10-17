@@ -1,1 +1,1 @@
-export { MainComponent as Main } from './main-screen';
+export { RegisterComponent as Registration } from './register-screen';

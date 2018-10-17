@@ -1,29 +1,53 @@
 import React, { Component, Alert } from 'react';
-import { Button, Container, Form, Item, Text, Input } from 'native-base';
-import { loginAction } from './auth-screen-actions';
-
-export class AuthComponent extends Component {
-  static navigationOptions = {
-    title: 'Authorization',
+import { Button, Container, Form, Item, Icon, Text, Input } from 'native-base';
+import { registerAction } from './register-screen-actions';
+export class RegisterComponent extends Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerTitle: 'Registration',
+      headerLeft: (
+        <Icon
+          onPress={() => navigation.goBack()}
+          type="FontAwesome"
+          name="chevron-left"
+        />
+      ),
+    };
   };
 
   state = {
-    login: '',
+    email: '',
+    first_name: '',
     password: '',
+    surname: '',
   };
 
   onChange = (type: string) => value => {
     switch (type) {
-      case 'login':
+      case 'email':
         this.setState(state => ({
           ...state,
-          login: value,
+          [type]: value,
         }));
         break;
+      case 'first_name': {
+        this.setState(state => ({
+          ...state,
+          [type]: value,
+        }));
+        break;
+      }
       case 'password': {
         this.setState(state => ({
           ...state,
-          password: value,
+          [type]: value,
+        }));
+        break;
+      }
+      case 'surname': {
+        this.setState(state => ({
+          ...state,
+          [type]: value,
         }));
         break;
       }
@@ -32,10 +56,12 @@ export class AuthComponent extends Component {
     }
   };
 
-  loginHandler = () => {
-    const { login, password } = this.state;
-    loginAction({ login, password });
-    // NOTE 17-Oct-18 [NZ]: skipped login
+  registerHandler = () => {
+    const { email, first_name, password, surname } = this.state;
+    registerAction({ email, first_name, password, surname })
+      .then()
+      .catch();
+    // NOTE 17-Oct-18 [NZ]: skipped registration
     this.props.navigation.navigate('Main');
   };
 
@@ -53,20 +79,29 @@ export class AuthComponent extends Component {
           }}
         >
           <Item>
-            <Input onChangeText={this.onChange('login')} placeholder="Email" />
+            <Input onChangeText={this.onChange('email')} placeholder="Email" />
           </Item>
-          <Item last>
+          <Item>
+            <Input
+              onChangeText={this.onChange('first_name')}
+              placeholder="First Name"
+            />
+          </Item>
+          <Item>
             <Input
               onChangeText={this.onChange('password')}
               placeholder="Password"
             />
           </Item>
+          <Item last>
+            <Input
+              onChangeText={this.onChange('surname')}
+              placeholder="Surname"
+            />
+          </Item>
         </Form>
-        <Button onPress={this.loginHandler} block info>
-          <Text>Login</Text>
-        </Button>
-        <Button block>
-          <Text>Register</Text>
+        <Button onPress={this.registerHandler}  block>
+          <Text>Complete Registration</Text>
         </Button>
       </Container>
     );
