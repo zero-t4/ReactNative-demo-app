@@ -19,7 +19,9 @@ export class MainComponent extends React.Component {
 
   createAsset = () => {};
 
-  createProject = () => {};
+  createProject = () => {
+    // TODO 17-Oct-18 [NZ]: implement creating project
+  };
 
   onChange = type => value => {
     switch (type) {
