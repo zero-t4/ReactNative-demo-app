@@ -16,18 +16,12 @@ export class AuthComponent extends Component {
   onChange = (type: string) => value => {
     switch (type) {
       case 'login':
+      case 'password':
         this.setState(state => ({
           ...state,
           [type]: value,
         }));
         break;
-      case 'password': {
-        this.setState(state => ({
-          ...state,
-          [type]: value,
-        }));
-        break;
-      }
       default:
         return;
     }
