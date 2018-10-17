@@ -1,5 +1,6 @@
 import React, { Component, Alert } from 'react';
 import { Button, Container, Form, Item, Icon, Text, Input } from 'native-base';
+import { StackActions, NavigationActions } from 'react-navigation';
 import { registerAction } from './register-screen-actions';
 export class RegisterComponent extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -62,7 +63,12 @@ export class RegisterComponent extends Component {
       .then()
       .catch();
     // NOTE 17-Oct-18 [NZ]: skipped registration
-    this.props.navigation.navigate('Main');
+    const resetAction = StackActions.reset({
+      index: 0,
+      actions: [NavigationActions.navigate({ routeName: 'Main' })],
+    });
+
+    this.props.navigation.dispatch(resetAction);
   };
 
   render() {
